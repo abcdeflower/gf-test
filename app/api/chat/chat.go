@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"time"
 	"web_test/app/service/chat"
+	"web_test/common"
 )
 
 type Controller struct{}
@@ -26,7 +27,7 @@ func (c *Controller) WebSocket(r *ghttp.Request) {
 		}
 		fmt.Printf("%s\n", reflect.TypeOf(ws))
 		if err := chat.ReceiveMsg(msgByte); err != nil {
-			fmt.Printf("receive error: %s\n", err)
+			common.Json(r, 0, fmt.Sprintf("receive error: %s", err), 0, nil)
 			break
 		}
 
